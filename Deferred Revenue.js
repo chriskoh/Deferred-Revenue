@@ -337,19 +337,6 @@ function functiona()
 			
 			allResults2NamesUnsort.push(result.getText('entity'));
 		}
-		
-		if(result.getValue('entity') == '0'){
-			
-			logx('entity', result.getText('entity'));
-			logx('amount', result.getValue('amount'));
-			logx('account', result.getValue('account'));
-			logx('internalid', result.getValue('internalid'));
-			logx('tranid', result.getValue('tranid'));
-			logx('type', result.getValue('type'));
-			logx('startdate', result.getValue('startdate'));
-			logx('enddate', result.getValue('enddate'));
-			logx('trandate', result.getValue('trandate'));
-		}
 	}
 	
 	// Trim invoice number array (remove repeated data)
@@ -411,7 +398,7 @@ function functiona()
 	}
 	filterss[1] 	= new nlobjSearchFilter('type', null, 'anyof', 'Journal');
 	filterss[2] 	= new nlobjSearchFilter('custbody_invoice_num', null, 'noneof', '@NONE@');
-	filterss[3]		= new nlobjSearchFilter('amount', null, 'lessthan', '0');
+	filterss[3]	= new nlobjSearchFilter('amount', null, 'lessthan', '0');
 	
 	var columnss = new Array();
 	columnss[0] 	= new nlobjSearchColumn('amount');
@@ -420,7 +407,7 @@ function functiona()
 	columnss[3] 	= new nlobjSearchColumn('custbody_invoice_num');
 	columnss[4] 	= new nlobjSearchColumn('internalid').setSort();
 	columnss[5] 	= new nlobjSearchColumn('tranid');
-	columnss[6]		= new nlobjSearchColumn('entity');
+	columnss[6]	= new nlobjSearchColumn('entity');
 	
 	var resultss = nlapiSearchRecord('transaction', null, filterss, columnss);
 	
@@ -504,220 +491,6 @@ function functiona()
 		}
 	}
 	
-	var xmlString = '<?xml version="1.0"?><?mso-application progid="Excel.Sheet"?>'; 
-    xmlString += '<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet" ';
-    xmlString += 'xmlns:o="urn:schemas-microsoft-com:office:office" ';
-    xmlString += 'xmlns:x="urn:schemas-microsoft-com:office:excel" ';
-    xmlString += 'xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet" ';
-    xmlString += 'xmlns:html="http://www.w3.org/TR/REC-html40">'; 
-    
-    xmlString += 	'<Styles>' +
-						'<Style ss:ID="centerWhite">' +
-							'<Borders>' +
-								'<Border ss:Position="Top" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-								'<Border ss:Position="Bottom" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-								'<Border ss:Position="Right" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-								'<Border ss:Position="Left" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-							'</Borders>' +
-							'<Interior ss:Color="#FFFFFF" ss:Pattern="Solid" />' +
-							'<Font ss:Bold="1" ss:Color="#000000" />' +
-							'<Alignment ss:Horizontal="Center" />' +
-						'</Style>' +
-						'<Style ss:ID="italicsWhite">' +
-						'<Borders>' +
-							'<Border ss:Position="Top" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-							'<Border ss:Position="Bottom" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-							'<Border ss:Position="Right" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-							'<Border ss:Position="Left" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'</Borders>' +
-						'<Interior ss:Color="#FFFFFF" ss:Pattern="Solid" />' +
-						'<Font ss:Bold="1" ss:Italic="1" ss:Color="#000000"/>' +
-					'</Style>' +
-					'<Style ss:ID="italicsBlue">' +
-						'<Borders>' +
-							'<Border ss:Position="Top" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-							'<Border ss:Position="Bottom" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-							'<Border ss:Position="Right" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-							'<Border ss:Position="Left" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'</Borders>' +
-						'<Interior ss:Color="#DCE6F0" ss:Pattern="Solid" />' +
-						'<Font ss:Bold="1" ss:Italic="1" ss:Color="#000000" />' +
-					'</Style>' +
-					'<Style ss:ID="titleWhite">' +
-					'<Borders>' +
-						'<Border ss:Position="Top" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'<Border ss:Position="Bottom" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'<Border ss:Position="Right" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'<Border ss:Position="Left" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-					'</Borders>' +
-					'<Interior ss:Color="#FFFFFF" ss:Pattern="Solid" />' +
-					'<NumberFormat ss:Format="General Number" />' +
-					'<Font ss:Bold="1" ss:Color="#000000" />' +
-				'</Style>' +
-				'<Style ss:ID="titleWhitecurrency">' +
-					'<Borders>' +
-						'<Border ss:Position="Top" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'<Border ss:Position="Bottom" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'<Border ss:Position="Right" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'<Border ss:Position="Left" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-					'</Borders>' +
-					'<Interior ss:Color="#FFFFFF" ss:Pattern="Solid" />' +
-					'<NumberFormat ss:Format="Currency" />' +
-					'<Font ss:Bold="1" ss:Color="#000000" />' +
-				'</Style>' +
-				'<Style ss:ID="titleWhitepercent">' +
-					'<Borders>' +
-						'<Border ss:Position="Top" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'<Border ss:Position="Bottom" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'<Border ss:Position="Right" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'<Border ss:Position="Left" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-					'</Borders>' +
-					'<Interior ss:Color="#FFFFFF" ss:Pattern="Solid" />' +
-					'<NumberFormat ss:Format="Percent" />' +
-					'<Font ss:Bold="1" ss:Color="#000000" />' +
-				'</Style>' +
-				'<Style ss:ID="titleBlue">' +
-					'<Borders>' +
-						'<Border ss:Position="Top" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'<Border ss:Position="Bottom" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'<Border ss:Position="Right" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'<Border ss:Position="Left" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-					'</Borders>' +
-					'<Interior ss:Color="#DCE6F0" ss:Pattern="Solid" />' +
-					'<NumberFormat ss:Format="General Number" />' +
-					'<Font ss:Bold="1" ss:Color="#000000" />' +
-				'</Style>' +
-				'<Style ss:ID="titleBluecurrency">' +
-					'<Borders>' +
-						'<Border ss:Position="Top" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'<Border ss:Position="Bottom" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'<Border ss:Position="Right" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'<Border ss:Position="Left" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-					'</Borders>' +
-					'<Interior ss:Color="#DCE6F0" ss:Pattern="Solid" />' +
-					'<NumberFormat ss:Format="Currency" />' +
-					'<Font ss:Bold="1" ss:Color="#000000" />' +
-				'</Style>' +
-				'<Style ss:ID="titleBluepercent">' +
-					'<Borders>' +
-						'<Border ss:Position="Top" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'<Border ss:Position="Bottom" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'<Border ss:Position="Right" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'<Border ss:Position="Left" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-					'</Borders>' +
-					'<Interior ss:Color="#DCE6F0" ss:Pattern="Solid" />' +
-					'<NumberFormat ss:Format="Percent" />' +
-					'<Font ss:Bold="1" ss:Color="#000000" />' +
-				'</Style>' +
-						'<Style ss:ID="odd">' +
-							'<Borders>' +
-								'<Border ss:Position="Top" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-								'<Border ss:Position="Bottom" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-								'<Border ss:Position="Right" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-								'<Border ss:Position="Left" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-							'</Borders>' +
-							'<NumberFormat ss:Format="General Number" />' +
-							'<Interior ss:Color="#DCE6F0" ss:Pattern="Solid" />' +
-						'</Style>' +
-						'<Style ss:ID="oddcurrency">' +
-							'<Borders>' +
-								'<Border ss:Position="Top" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-								'<Border ss:Position="Bottom" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-								'<Border ss:Position="Right" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-								'<Border ss:Position="Left" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-							'</Borders>' +
-							'<NumberFormat ss:Format="Currency" />' +
-							'<Interior ss:Color="#DCE6F0" ss:Pattern="Solid" />' +
-						'</Style>' +
-						'<Style ss:ID="oddpercent">' +
-						'<Borders>' +
-							'<Border ss:Position="Top" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-							'<Border ss:Position="Bottom" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-							'<Border ss:Position="Right" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-							'<Border ss:Position="Left" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'</Borders>' +
-						'<NumberFormat ss:Format="Percent" />' +
-						'<Interior ss:Color="#DCE6F0" ss:Pattern="Solid" />' +
-						'</Style>' +
-						'<Style ss:ID="even">' +
-						'<Borders>' +
-							'<Border ss:Position="Top" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-							'<Border ss:Position="Bottom" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-							'<Border ss:Position="Right" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-							'<Border ss:Position="Left" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'</Borders>' +
-						'<NumberFormat ss:Format="General Number" />' +
-						'<Interior ss:Color="#FFFFFF" ss:Pattern="Solid" />' +
-					'</Style>' +
-					'<Style ss:ID="evencurrency">' +
-						'<Borders>' +
-							'<Border ss:Position="Top" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-							'<Border ss:Position="Bottom" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-							'<Border ss:Position="Right" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-							'<Border ss:Position="Left" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'</Borders>' +
-						'<NumberFormat ss:Format="Currency" />' +
-						'<Interior ss:Color="#FFFFFF" ss:Pattern="Solid" />' +
-					'</Style>' +
-					'<Style ss:ID="evenpercent">' +
-					'<Borders>' +
-						'<Border ss:Position="Top" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'<Border ss:Position="Bottom" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'<Border ss:Position="Right" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-						'<Border ss:Position="Left" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-					'</Borders>' +
-					'<NumberFormat ss:Format="Percent" />' +
-					'<Interior ss:Color="#FFFFFF" ss:Pattern="Solid" />' +
-					'</Style>' +
-						'<Style ss:ID="tabbed">' +
-							'<Borders>' +
-								'<Border ss:Position="Top" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-								'<Border ss:Position="Bottom" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-								'<Border ss:Position="Right" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-								'<Border ss:Position="Left" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-							'</Borders>' +
-							'<Alignment ss:Indent="4" />' +
-						'</Style>' +
-						'<Style ss:ID="tabbedodd">' +
-							'<Borders>' +
-								'<Border ss:Position="Top" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-								'<Border ss:Position="Bottom" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-								'<Border ss:Position="Right" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-								'<Border ss:Position="Left" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-							'</Borders>' +
-							'<Alignment ss:Indent="4" />' +
-							'<Interior ss:Color="#DCE6F0" ss:Pattern="Solid" />' +
-						'</Style>' +
-
-						'<Style ss:ID="blank">' +
-							'<Borders>' +
-								'<Border ss:Position="Top" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-								'<Border ss:Position="Bottom" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-								'<Border ss:Position="Right" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-								'<Border ss:Position="Left" ss:Color="#D4D4D4" ss:LineStyle="Continuous" ss:Weight="1" />' +
-							'</Borders>' +
-							'<Interior ss:Color="#878787" ss:Pattern="Solid" />' +
-							'<Alignment ss:Horizontal="Center" />' +
-						'</Style>' +
-					'</Styles>';
-    
-   xmlString += '<Worksheet ss:Name="Sheet1">';
-   xmlString += '<Table>' +
-	'<Row>' +
-		'<Cell ss:StyleID="titleWhite"><Data ss:Type="String">Name</Data></Cell>' +
-		'<Cell ss:StyleID="centerWhite"><Data ss:Type="String">Invoice #</Data></Cell>' +
-		'<Cell ss:StyleID="centerWhite"><Data ss:Type="String">Date</Data>Date</Cell>' +
-		'<Cell ss:StyleID="centerWhite"><Data ss:Type="String">Start Date</Data></Cell>' +
-		'<Cell ss:StyleID="centerWhite"><Data ss:Type="String">End Date</Data></Cell>' +
-		'<Cell ss:StyleID="centerWhite"><Data ss:Type="String">Match</Data></Cell>' +
-		'<Cell ss:StyleID="centerWhite"><Data ss:Type="String">Revenue (Invoices)</Data></Cell>' +
-		'<Cell ss:StyleID="centerWhite"><Data ss:Type="String">Revenue (Journals)</Data></Cell>' +
-		'<Cell ss:StyleID="centerWhite"><Data ss:Type="String">Commission (Invoices)</Data></Cell>' +
-		'<Cell ss:StyleID="centerWhite"><Data ss:Type="String">Commission (Journals)</Data></Cell>' +
-		'<Cell ss:StyleID="centerWhite"><Data ss:Type="String">Commission Rate</Data></Cell>';
-
-	
-	
 	html  = '<html>';
 	html += '<head>';
 	html += '<script src="https://system.netsuite.com/core/media/media.nl?id=359359&c=811217&h=65afe36a877be122622c&_xt=.js"></script>';
@@ -746,17 +519,14 @@ function functiona()
 		var totalmonth = x.getMonth();
 		var totalYearVal = x.getFullYear();
 		html += '<td>' + x.format("mmm - yyyy") + '</td>';
-		xmlString += '<Cell ss:StyleID="centerWhite"><Data ss:Type="String">' + x.format("mmm - yyyy") + '</Data></Cell>';
-		
+
 		if(totalmonth == '11'){
 			
 			html += '<td>Balance as of ' + totalYearVal + '</td>';
-			xmlString += '<Cell ss:StyleID="centerWhite"><Data ss:Type="String">Balance as of ' + totalYearVal + '</Data></Cell>';
 		}
 	}
-	xmlString += '</Row>';
-				html += '<td>Back Journal</td>' +
-					'</tr>';
+	html += '<td>Back Journal</td>' +
+		'</tr>';
 				
 	for(var x = 0; x < allResults2Sorted.length; x++){
 		
@@ -819,20 +589,6 @@ function functiona()
 			'<td><div align="right">' + numberWithCommas(setComAmount.toFixed(2)) + '</div></td>' +
 			'<td><div align="right">' + numberWithCommas(setJeAmountCom.toFixed(2)) + '</div></td>' +
 			'<td><div align="right">' + numberWithCommas(comissionRate.toFixed(2)) + '%</div></td>';		
-			
-			xmlString += '<Row>' +
-							'<Cell ss:StyleID="titleWhite"><Data ss:Type="String">' + result.getText('entity').replace(/[0-9]/g, '') + '</Data></Cell>' +
-							'<Cell ss:StyleID="titleWhite"><Data ss:Type="String">' + setInvNumber + '</Data></Cell>' +
-							'<Cell ss:StyleID="titleWhite"><Data ss:Type="String">' + setDate + '</Data></Cell>' +
-							'<Cell ss:StyleID="titleWhite"><Data ss:Type="String">' + setStartDate + '</Data></Cell>' +
-							'<Cell ss:StyleID="titleWhite"><Data ss:Type="String">' + setEndDate + '</Data></Cell>' +
-							'<Cell ss:StyleID="titleWhite"><Data ss:Type="String">' + match + '</Data></Cell>' +
-							'<Cell ss:StyleID="titleWhite"><Data ss:Type="Number">' + numberWithCommas(setInvAmount.toFixed(2)) + '</Data></Cell>' +
-							'<Cell ss:StyleID="titleWhite"><Data ss:Type="Number">' + numberWithCommas(setJeAmount.toFixed(2)) + '</Data></Cell>' +
-							'<Cell ss:StyleID="titleWhite"><Data ss:Type="Number">' + numberWithCommas(setComAmount.toFixed(2)) + '</Data></Cell>' +
-							'<Cell ss:StyleID="titleWhite"><Data ss:Type="Number">' + numberWithCommas(setJeAmountCom.toFixed(2)) + '</Data></Cell>' +
-							'<Cell ss:StyleID="titleWhite"><Data ss:Type="String">' + numberWithCommas(comissionRate.toFixed(2)) + '%</Data></Cell>';
-			
 		}
 		if(byVendors == 'tot' || byVendors == 'invtot'){
 			
@@ -893,7 +649,6 @@ function functiona()
 				if(byVendors == 'inv' || byVendors == 'invtot'){
 					
 					html += '<td><a href="' + url + '" target="_blank"><div align="right">' + numberWithCommas(jTotal.toFixed(2)) + '</div></a></td>';
-					xmlString += '<Cell ss:StyleID="titleWhite"><Data ss:Type="Number">' + numberWithCommas(jTotal.toFixed(2)) + '</Data></Cell>';
 					w["yeartotal" + jId + jYear] += Number(jTotal);
 				}
 				if(byVendors == 'tot' || byVendors == 'invtot'){
@@ -906,7 +661,6 @@ function functiona()
 				if(byVendors == 'inv' || byVendors == 'invtot'){
 
 					html += '<td><div align="center"> - </div></td>';
-					xmlString += '<Cell ss:StyleID="titleWhite"><Data ss:Type="String"> - </Data></Cell>';
 				}
 			}
 			if(totalmonth == '11'){ // inv
@@ -918,7 +672,7 @@ function functiona()
 					
 					if(setJeAmountCom == Number(0)){
 						
-						balanceasof = Number(0);
+					`balanceasof = Number(0);
 					}
 					else{
 						
@@ -928,8 +682,7 @@ function functiona()
 				}
 				
 				html += '<td><div align="right">' + numberWithCommas(balanceasof.toFixed(2)) + '</div></td>';
-				xmlString += '<Cell ss:StyleID="titleWhite"><Data ss:Type="Number">' + numberWithCommas(balanceasof.toFixed(2)) + '</Data></Cell>';
-				
+
 				w["yeartotal2" + result.getText('entity') + totalYearVal] += Number(balanceasof);
 			//	logx(result.getText('entity'), 'balance as of = ' + balanceasof + ' = ' + setJeAmount + ' - ' + w["yeartotal" + jId + jYear] + '(jId: ' + jId + ')' + '(jTotal: ' + jTotal + ')' + '(jEntity: ' + jEntity + ')');
 			}
@@ -948,7 +701,6 @@ function functiona()
 					if(byVendors == 'inv' || byVendors == 'invtot'){
 						
 						html += '<div align="right"><a href="' + urlz + '" target="_blank"><div align="right">' + numberWithCommas(allResultsz[x10].getValue('amount')) + '</div></a>';
-						//xmlString += '<Cell ss:StyleID="titleWhite"><Data ss:Type="String">' + numberWithCommas(allResultsz[x10].getValue('amount')) + '</Data></Cell>';
 					}
 
 					bjTotals += Number(allResultsz[x10].getValue('amount'));
@@ -963,12 +715,10 @@ function functiona()
 		var printingtotal = Number(bjTotals) - Number(jeTotals);
 		if(byVendors == 'inv'){
 			html += '<td><div align="right">' + numberWithCommas(bjTotals.toFixed(2)) + '</div></td>';
-			xmlString += '<Cell ss:StyleID="titleWhite"><Data ss:Type="Number">' + numberWithCommas(bjTotals.toFixed(2)) + '</Data></Cell>';
 		}
 		if(byVendors == 'inv' || byVendors == 'invtot'){
 			
 			html += '</tr>';		
-			xmlString += '</Row>';
 		}
 		if(byVendors == 'tot' || byVendors == 'invtot'){
 			
@@ -1001,20 +751,7 @@ function functiona()
 				'<td><div align="right">' + numberWithCommas(w["invcom" + allResults2NamesSorted[x]].toFixed(2)) + '</div></td>' +
 				'<td><div align="right">' + numberWithCommas(w["jecom" + allResults2NamesSorted[x]].toFixed(2)) + '</div></td>' +
 				'<td><div align="right">' + rate.toFixed(2) + '%</div></td>';
-						
-				xmlString += '<Row>' +
-				'<Cell ss:StyleID="titleWhite"><Data ss:Type="String">' + allResults2NamesSorted[x].replace(/[0-9]/g, '') + ' (Total)</Data></Cell>' +
-				'<Cell ss:StyleID="titleWhite"><Data ss:Type="String">-</Data></Cell>' +
-				'<Cell ss:StyleID="titleWhite"><Data ss:Type="String">-</Data></Cell>' +
-				'<Cell ss:StyleID="titleWhite"><Data ss:Type="String">-</Data></Cell>' +
-				'<Cell ss:StyleID="titleWhite"><Data ss:Type="String">-</Data></Cell>' +
-				'<Cell ss:StyleID="titleWhite"><Data ss:Type="String">' + match + '</Data></Cell>' +
-				'<Cell ss:StyleID="titleWhite"><Data ss:Type="Number">' + numberWithCommas(w["invrev" + allResults2NamesSorted[x]].toFixed(2)) + '</Data></Cell>' +
-				'<Cell ss:StyleID="titleWhite"><Data ss:Type="Number">' + numberWithCommas(w["jerev" + allResults2NamesSorted[x]].toFixed(2)) + '</Data></Cell>' +
-				'<Cell ss:StyleID="titleWhite"><Data ss:Type="Number">' + numberWithCommas(w["invcom" + allResults2NamesSorted[x]].toFixed(2)) + '</Data></Cell>' +
-				'<Cell ss:StyleID="titleWhite"><Data ss:Type="Number">' + numberWithCommas(w["jecom" + allResults2NamesSorted[x]].toFixed(2)) + '</Data></Cell>' +
-				'<Cell ss:StyleID="titleWhite"><Data ss:Type="String">' + numberWithCommas(rate.toFixed(2)) + '%</Data></Cell>';
-				
+
 				var mc = 0;
 				for(var y = setStartDate1; y <= finalend; y = nlapiAddMonths(y, 1)){
 					
@@ -1028,11 +765,9 @@ function functiona()
 					if(w["amt" + allResults2NamesSorted[x] + mc] != Number(0)){
 
 						html += '<td><div align="right">' + numberWithCommas(w["amt" + allResults2NamesSorted[x] + mc].toFixed(2)) + '</div></td>';
-						xmlString += '<Cell ss:StyleID="titleWhite"><Data ss:Type="Number">' + numberWithCommas(w["amt" + allResults2NamesSorted[x] + mc].toFixed(2)) + '</Data></Cell>';
 					}else{
 						
 						html += '<td><div align="center"> - </div></td>';
-						xmlString += '<Cell ss:StyleID="titleWhite"><Data ss:Type="String"> - </Data></Cell>';
 					}
 					if(totalmonth == '11'){
 												
@@ -1040,11 +775,9 @@ function functiona()
 							
 							var zero = Number(0);
 							html += '<td><div align="right">' + numberWithCommas(zero.toFixed(2)) + '</div></td>';
-							xmlString += '<Cell ss:StyleID="titleWhite"><Data ss:Type="Number">' + numberWithCommas(zero.toFixed(2)) + '</Data></Cell>';
 						}else{
 							
 							html += '<td><div align="right">' + numberWithCommas(w["yeartotal2" + allResults2NamesSorted[x] + thisyear].toFixed(2)) + '</div></td>';
-							xmlString += '<Cell ss:StyleID="titleWhite"><Data ss:Type="Number">' + numberWithCommas(w["yeartotal2" + allResults2NamesSorted[x] + thisyear].toFixed(2)) + '</Data></Cell>';
 						}
 					}
 					mc++;
@@ -1052,25 +785,10 @@ function functiona()
 				
 				html += '<td><div align="right">' + numberWithCommas(w["backj" + allResults2NamesSorted[x]].toFixed(2)) + '</div></td>';
 				html += '</tr>';
-				xmlString += '</Row>';
 		}
 	}
-
-	xmlString += '</Table>';
-    
-    xmlString += '</Worksheet></Workbook>';
-    
-    
-    //create file
-    var xlsFile = nlapiCreateFile('Advertising Revenue.xls', 'EXCEL', nlapiEncrypt(xmlString, 'base64'));
-
-    xlsFile.setFolder(311745);
-
-    //save file 
-    var fileID = nlapiSubmitFile(xlsFile);
     
 	html += '</table>' +
-	'<a download="Advertising Revenue.xls" href="https://system.netsuite.com/core/media/media.nl?id=391620&c=811217&h=7c4f1b10c297e98ea12a&_xt=.xls"><img border="0" src="https://system.netsuite.com/core/media/media.nl?id=359613&c=811217&h=fc363d53d0ba20e43b9c"></a>' +
 			'</body>' +
 			'</html>';
 	
@@ -1085,182 +803,4 @@ function functiona()
 	
 	response.writePage(form2);
 	logx('end', 'end');
-}
-
-function function2()
-{
-	
-	var filters = new Array();
-	filters[0] = new nlobjSearchFilter('type', null, 'anyof', 'CustInvc');
-	filters[1] = new nlobjSearchFilter('tranid', null, 'contains', 'INV04639');
-	filters[2] = new nlobjSearchFilter('account', null, 'anyof', ['195', '196', '193', '194', '192', '198', '199']);
-
-	var columns = new Array();
-	columns[0] = new nlobjSearchColumn('amount');
-	columns[1] = new nlobjSearchColumn('trandate');
-	columns[2] = new nlobjSearchColumn('account');
-	columns[3] = new nlobjSearchColumn('internalid');
-	columns[4] = new nlobjSearchColumn('tranid');
-	columns[5] = new nlobjSearchColumn('type');
-	
-	var results = nlapiSearchRecord('transaction', null, filters, columns);
-
-
-	//set all results array for searches of 1000+
-	var allResults = new Array();
-	allResults = allResults.concat(results);
-	//log_exec(allResults.length);	
-}
-
-// Loop through an array and remove repeated data
-function trim(arr)
-{
-	var i,
-	len=arr.length,
-	out=[],
-	obj={};
-
-	for (i=0;i<len;i++) 
-	{
-		obj[arr[i]]=0;
-	}
-	for (i in obj) 
-	{
-		out.push(i);
-	}
-	
-	return out;
-}
-
-// Log execution
-function logx(name, value)
-{	
-	var context        = nlapiGetContext();
-	var usageRemaining = context.getRemainingUsage();
-	nlapiLogExecution ('DEBUG', name + ' | ' + usageRemaining, value);
-}
-
-function GetDifference(to, from)
-{
-var dtFrom = new Date(from);
-var dtTo = new Date(to);
-var monthsOut = MonthsBetween(dtFrom, dtTo);
-return monthsOut;
-}
-var dateFormat = function () {
-    var    token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZ]|"[^"]*"|'[^']*'/g,
-        timezone = /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g,
-        timezoneClip = /[^-+\dA-Z]/g,
-        pad = function (val, len) {
-            val = String(val);
-            len = len || 2;
-            while (val.length < len) val = "0" + val;
-            return val;
-        };
-
-    // Regexes and supporting functions are cached through closure
-    return function (date, mask, utc) {
-        var dF = dateFormat;
-
-        // You can't provide utc if you skip other args (use the "UTC:" mask prefix)
-        if (arguments.length == 1 && Object.prototype.toString.call(date) == "[object String]" && !/\d/.test(date)) {
-            mask = date;
-            date = undefined;
-        }
-
-        // Passing date through Date applies Date.parse, if necessary
-        date = date ? new Date(date) : new Date;
-        if (isNaN(date)) throw SyntaxError("invalid date");
-
-        mask = String(dF.masks[mask] || mask || dF.masks["default"]);
-
-        // Allow setting the utc argument via the mask
-        if (mask.slice(0, 4) == "UTC:") {
-            mask = mask.slice(4);
-            utc = true;
-        }
-
-        var    _ = utc ? "getUTC" : "get",
-            d = date[_ + "Date"](),
-            D = date[_ + "Day"](),
-            m = date[_ + "Month"](),
-            y = date[_ + "FullYear"](),
-            H = date[_ + "Hours"](),
-            M = date[_ + "Minutes"](),
-            s = date[_ + "Seconds"](),
-            L = date[_ + "Milliseconds"](),
-            o = utc ? 0 : date.getTimezoneOffset(),
-            flags = {
-                d:    d,
-                dd:   pad(d),
-                ddd:  dF.i18n.dayNames[D],
-                dddd: dF.i18n.dayNames[D + 7],
-                m:    m + 1,
-                mm:   pad(m + 1),
-                mmm:  dF.i18n.monthNames[m],
-                mmmm: dF.i18n.monthNames[m + 12],
-                yy:   String(y).slice(2),
-                yyyy: y,
-                h:    H % 12 || 12,
-                hh:   pad(H % 12 || 12),
-                H:    H,
-                HH:   pad(H),
-                M:    M,
-                MM:   pad(M),
-                s:    s,
-                ss:   pad(s),
-                l:    pad(L, 3),
-                L:    pad(L > 99 ? Math.round(L / 10) : L),
-                t:    H < 12 ? "a"  : "p",
-                tt:   H < 12 ? "am" : "pm",
-                T:    H < 12 ? "A"  : "P",
-                TT:   H < 12 ? "AM" : "PM",
-                Z:    utc ? "UTC" : (String(date).match(timezone) || [""]).pop().replace(timezoneClip, ""),
-                o:    (o > 0 ? "-" : "+") + pad(Math.floor(Math.abs(o) / 60) * 100 + Math.abs(o) % 60, 4),
-                S:    ["th", "st", "nd", "rd"][d % 10 > 3 ? 0 : (d % 100 - d % 10 != 10) * d % 10]
-            };
-
-        return mask.replace(token, function ($0) {
-            return $0 in flags ? flags[$0] : $0.slice(1, $0.length - 1);
-        });
-    };
-}();
-
-// Some common format strings
-dateFormat.masks = {
-    "default":      "ddd mmm dd yyyy HH:MM:ss",
-    shortDate:      "m/d/yy",
-    mediumDate:     "mmm d, yyyy",
-    longDate:       "mmmm d, yyyy",
-    fullDate:       "dddd, mmmm d, yyyy",
-    shortTime:      "h:MM TT",
-    mediumTime:     "h:MM:ss TT",
-    longTime:       "h:MM:ss TT Z",
-    isoDate:        "yyyy-mm-dd",
-    isoTime:        "HH:MM:ss",
-    isoDateTime:    "yyyy-mm-dd'T'HH:MM:ss",
-    isoUtcDateTime: "UTC:yyyy-mm-dd'T'HH:MM:ss'Z'"
-};
-
-// Internationalization strings
-dateFormat.i18n = {
-    dayNames: [
-        "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat",
-        "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"
-    ],
-    monthNames: [
-        "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec",
-        "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
-    ]
-};
-
-// For convenience...
-Date.prototype.format = function (mask, utc) {
-    return dateFormat(this, mask, utc);
-};
-function numberWithCommas(x)
-{
-    var parts = x.toString().split(".");
-    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    return parts.join(".");
 }
