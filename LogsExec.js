@@ -1,3 +1,4 @@
+// Event Logging
 function logx(name, value)
 {	
 	var context        = nlapiGetContext();
