@@ -1,3 +1,4 @@
+// Remove duplicated elements in array
 function trim(arr)
 {
 	var i,
