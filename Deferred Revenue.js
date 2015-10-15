@@ -2,7 +2,7 @@
  * Module Description
  * 
  * Version    Date            Author           Remarks
- * 1.00       26 Mar 2014     Staff
+ * 1.00       26 Mar 2014     Chris
  *
  */
 
@@ -48,8 +48,8 @@ function function3(){
 	columns[4] 	= new nlobjSearchColumn('internalid').setSort();
 	columns[5] 	= new nlobjSearchColumn('tranid');
 	columns[6]	= new nlobjSearchColumn('entity');
-	columns[7]  = new nlobjSearchColumn('type');
-	columns[8]  = new nlobjSearchColumn('memo');
+	columns[7]  	= new nlobjSearchColumn('type');
+	columns[8]  	= new nlobjSearchColumn('memo');
 	columns[9] 	= new nlobjSearchColumn('custbody_invoice_num');
 
 	
@@ -96,7 +96,7 @@ function function3(){
 	columns2[3] 	= new nlobjSearchColumn('custbody_invoice_num');
 	columns2[4] 	= new nlobjSearchColumn('internalid').setSort();
 	columns2[5] 	= new nlobjSearchColumn('tranid');
-	columns2[6]		= new nlobjSearchColumn('entity');
+	columns2[6]	= new nlobjSearchColumn('entity');
 	columns2[7]  	= new nlobjSearchColumn('type');
 	columns2[8]  	= new nlobjSearchColumn('memo');
 	columns2[9] 	= new nlobjSearchColumn('custbody_invoice_num');
@@ -212,10 +212,10 @@ function functiona()
  //logx('byVendors', byVendors);
 	
 	var invNumUnsort = new Array();
-	var invNum 	= new Array();
-	var invVal 	= new Array();
-	var comVal 	= new Array();
-	var getToday = new Date();
+	var invNum 	 = new Array();
+	var invVal 	 = new Array();
+	var comVal       = new Array();
+	var getToday 	 = new Date();
 	
 	// Search for all journal entries that have associated invoices
 	var filters = new Array();
@@ -256,9 +256,6 @@ function functiona()
 		var result = allResults[i];
 		invNumUnsort.push(result.getValue('custbody_invoice_num'));
 		
-		if(allResults[i] == '2090672'){
-			//logx('invNumUnsort', allResults[i]);
-		}
 	}
 	
 	// Trim invoice number array (remove repeated data)
@@ -369,7 +366,7 @@ function functiona()
 	columnsz[3] 	= new nlobjSearchColumn('custbody_invoice_num');
 	columnsz[4] 	= new nlobjSearchColumn('internalid').setSort();
 	columnsz[5] 	= new nlobjSearchColumn('tranid');
-	columnsz[6]		= new nlobjSearchColumn('entity');
+	columnsz[6]	= new nlobjSearchColumn('entity');
 	
 	var resultsz = nlapiSearchRecord('transaction', null, filtersz, columnsz);
 	
@@ -639,7 +636,6 @@ function functiona()
 						jYear = new Date(jDate).getFullYear();
 						jEntity = allResultss[y2].getText('entity');
 						jId		= allResultss[y2].getValue('custbody_invoice_num');
-						//var url = nlapiResolveURL('record', 'journalentry', urlID);
 						jeTotals += Math.abs(allResultss[y2].getValue('amount'));
 					}
 				}
@@ -684,7 +680,6 @@ function functiona()
 				html += '<td><div align="right">' + numberWithCommas(balanceasof.toFixed(2)) + '</div></td>';
 
 				w["yeartotal2" + result.getText('entity') + totalYearVal] += Number(balanceasof);
-			//	logx(result.getText('entity'), 'balance as of = ' + balanceasof + ' = ' + setJeAmount + ' - ' + w["yeartotal" + jId + jYear] + '(jId: ' + jId + ')' + '(jTotal: ' + jTotal + ')' + '(jEntity: ' + jEntity + ')');
 			}
 			if(byVendors == 'tot' || byVendors == 'invtot'){
 				mc++;
