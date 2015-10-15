@@ -1,4 +1,7 @@
-// Remove duplicated elements in array
+/*-------------------------------------------------------------------------------------------------
+Function: trim(arr)
+Purpose:  remove all duplicated elements in an array
+-------------------------------------------------------------------------------------------------*/
 function trim(arr)
 {
 	var i,
