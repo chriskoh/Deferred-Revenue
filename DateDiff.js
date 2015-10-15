@@ -1,3 +1,4 @@
+// Calculate number of months between two date objects
 function GetDifference(to, from){
   var dtFrom = new Date(from);
   var dtTo = new Date(to);
